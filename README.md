@@ -1155,6 +1155,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## 👤 Author
+
+**Husna Siddiqa** - AI/ML Engineer
+
+Built for pharmaceutical analytics at **Setuserv Informatics Pvt Ltd**
+
 ## 📞 Contact
 
 For questions, issues, or contributions:
@@ -1211,7 +1217,12 @@ For questions, issues, or contributions:
 
 <div align="center">
 
-**Built with ❤️ using cutting-edge AI and cloud technologies**
+
+*AI/ML Engineer | Setuserv Informatics Pvt Ltd*
+
+*Developed for pharmaceutical analytics and business intelligence*
+
+---
 
 ⭐ Star this repo if you find it useful!
 
