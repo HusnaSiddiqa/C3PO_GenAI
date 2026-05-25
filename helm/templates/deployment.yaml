@@ -1,0 +1,564 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-admin
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-admin
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-admin
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: admin
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-admin
+        ports:
+          - containerPort: 80
+        readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-chat-mgr
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chat-mgr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chat-mgr
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: chat-mgr
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-orchestrator
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-chat-mgr
+        ports:
+          - containerPort: 8081
+        readinessProbe:
+            httpGet:
+              path: /
+              port: 8081
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-ui
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ui
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ui
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: ui
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-ui
+        ports:
+          - containerPort: 80
+        readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-nlq
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-nlq
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-nlq
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: nlq
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-nlq
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-nlq
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+            httpGet:
+              path: /v2/agents/nlq/.well-known/agent.json
+              port: 8000
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /v2/agents/nlq/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-byod
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-byod
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-byod
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: byod
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-byod
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-byod
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+            httpGet:
+              path: /v2/agents/byod/.well-known/agent.json
+              port: 8000
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /v2/agents/byod/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-orchestrator
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-orchestrator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-orchestrator
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: orchestrator
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-orchestrator
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-orchestrator
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+            httpGet:
+              path: /v2/agents/orchestrator/.well-known/agent.json
+              port: 8000
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /v2/agents/orchestrator/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-precanned-deck
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-precanned-deck
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-precanned-deck
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: precanned_deck
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-precanned-deck
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-precanned-deck
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+            httpGet:
+              path: /v2/agents/precanned_deck/.well-known/agent.json
+              port: 8000
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /v2/agents/precanned_deck/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-ppt
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ppt
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ppt
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: ppt
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-ppt
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-ppt
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+            httpGet:
+              path: /v2/agents/ppt/.well-known/agent.json
+              port: 8000
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /v2/agents/ppt/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-chart
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chart
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chart
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: chart
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-chart
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-chart
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /v2/agents/chart/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /v2/agents/chart/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commercial-us-sbx-iidd-genai-rag
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: 2
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-rag
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-rag
+        schedule_on: "fargate"
+    spec:
+      serviceAccountName: {{ .Values.service_account.name }}
+      containers:
+      - image: {{ .Values.c3po.image.url }}
+        imagePullPolicy: {{ .Values.c3po.image.imagePullPolicy }}
+        env:
+          - name: SERVICE_TYPE
+            value: rag
+          - name: AGENT_BASE_URL
+            value: commercial-us-sbx-iidd-genai-rag
+        envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-config
+        name: commercial-us-sbx-iidd-genai-rag
+        ports:
+          - containerPort: 8000
+        readinessProbe:
+            httpGet:
+              path: /v2/agents/rag/.well-known/agent.json
+              port: 8000
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        livenessProbe:
+          httpGet:
+            path: /v2/agents/rag/.well-known/agent.json
+            port: 8000
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 2
+            memory: 4Gi

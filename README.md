@@ -1,0 +1,1 @@
+Refer Pipeline to deploy container on EKS clusters in README.md to use the pipeline.

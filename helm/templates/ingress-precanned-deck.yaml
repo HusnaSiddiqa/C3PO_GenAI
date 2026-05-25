@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: ingress-us-iidd-genai-precanned-deck
+ annotations:
+   kubernetes.io/ingress.class: alb
+   alb.ingress.kubernetes.io/scheme: internal
+   alb.ingress.kubernetes.io/target-type: 'ip'
+   alb.ingress.kubernetes.io/load-balancer-name: {{ .Values.env.ALB_NAME }}
+   alb.ingress.kubernetes.io/group.name: {{ .Values.env.ALB_NAME }}
+   alb.ingress.kubernetes.io/group.order: '10'
+   {{ if .Values.app.add_certificate }}
+   alb.ingress.kubernetes.io/certificate-arn: {{ .Values.app.certificate_arn }}
+   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+   alb.ingress.kubernetes.io/ssl-redirect: '443'
+   {{ end }}
+   {{ if not .Values.app.add_certificate }}
+   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+   {{ end }}
+   alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=900
+   # Health check configuration
+   alb.ingress.kubernetes.io/healthcheck-interval-seconds: '30'
+   alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
+   alb.ingress.kubernetes.io/healthy-threshold-count: '3'
+   alb.ingress.kubernetes.io/unhealthy-threshold-count: '3'
+   alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+   alb.ingress.kubernetes.io/healthcheck-path: /v2/agents/precanned_deck/.well-known/agent.json
+spec:
+ ingressClassName: alb
+ rules:
+   - http:
+      paths:
+        - path: /v2/agents/precanned_deck
+          pathType: Prefix
+          backend:
+            service:
+              name: commercial-us-sbx-iidd-genai-precanned-deck
+              port:
+                number: {{ .Values.env.AGENT_BASE_PORT }}

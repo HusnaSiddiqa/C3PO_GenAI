@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: commercial-us-sbx-iidd-genai-chart
+spec:
+  selector:
+    app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chart
+  ports:
+    - name: http
+      port: {{ .Values.env.AGENT_BASE_PORT }}
+      targetPort: 8000
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800

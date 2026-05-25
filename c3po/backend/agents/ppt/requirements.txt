@@ -1,0 +1,24 @@
+# Requirements for PowerPoint Generation Tool
+
+# Core dependencies
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# PowerPoint manipulation
+python-pptx>=0.6.21
+
+# LangChain framework
+langchain>=0.1.0
+langchain-core>=0.1.0
+
+# Additional utilities
+Pillow>=10.0.0  # For image processing
+openpyxl>=3.1.0  # For Excel file support
+xlrd>=2.0.0  # For old Excel format support
+
+# Development and testing (optional)
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0

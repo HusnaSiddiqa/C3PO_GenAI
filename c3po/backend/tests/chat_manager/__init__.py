@@ -1,0 +1,1 @@
+# Chat Manager Tests Package 

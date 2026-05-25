@@ -1,0 +1,97 @@
+classDiagram
+    %% Agent Module Classes
+    class AgentBase {
+        <<abstract>>
+        +name: str
+        +description: str
+        -llm: BaseChatModel
+        -_state_type: Type[TState]
+        -_agent: CompiledGraph
+        -_executor: AgentExecutor
+        -_agent_skill: AgentSkill
+        +invoke(messages: List[Dict], **kwargs) Any
+        +ainvoke(messages: List[Dict], **kwargs) Any
+        +run_server(host: str, port: int, path: str)
+        #_build_graph()* StateGraph
+        #_state_dataclass() Type[TState]
+        -_set_agent_skill(skill: AgentSkill)
+        -_finish(state: ConversationState)$ str
+    }
+
+    class AgentExecutor {
+        -agent: AgentBase
+        +execute(context: RequestContext, event_queue: EventQueue)
+        +cancel(request: RequestContext, event_queue: EventQueue)
+        -_validate_request(context: RequestContext) bool
+    }
+
+    class ConversationState {
+        +messages: List[Dict]
+        +step: int
+    }
+
+    class ResponseFormat {
+        +status: Literal['input_required', 'completed', 'error']
+        +message: str
+    }
+
+    %% Concrete Agent Implementation
+    class NLQAgent {
+        -tools: Tools
+        +stream(query: str, thread_id: str) AsyncIterator[Dict]
+        #_build_graph() StateGraph
+    }
+
+    %% External Dependencies
+    class BaseChatModel {
+        <<external>>
+    }
+
+    class StateGraph {
+        <<external>>
+    }
+
+    class CompiledGraph {
+        <<external>>
+    }
+
+    class AgentSkill {
+        <<external>>
+        +id: str
+        +name: str
+        +description: str
+        +tags: List[str]
+    }
+
+    class RequestContext {
+        <<external>>
+        +message: Message
+        +current_task: Task
+        +get_user_input() str
+    }
+
+    class EventQueue {
+        <<external>>
+        +enqueue_event(event: Any)
+    }
+
+    class TaskUpdater {
+        <<external>>
+        +update_status(status: TaskState, message: Message, final: bool)
+        +add_artifact(parts: List[Part], name: str)
+        +complete()
+    }
+
+    %% Relationships
+    AgentBase <|-- NLQAgent
+    AgentBase --> AgentExecutor
+    AgentBase --> ConversationState
+    AgentBase --> BaseChatModel
+    AgentBase --> ResponseFormat
+    AgentBase --> AgentSkill
+    AgentBase --> StateGraph
+    AgentBase --> CompiledGraph
+
+    AgentExecutor --> RequestContext
+    AgentExecutor --> EventQueue
+    AgentExecutor --> TaskUpdater 

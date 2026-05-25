@@ -1,0 +1,1 @@
+export const SUPPORTED_FORMATS = [".csv", ".xlsx", ".pdf", ".json", ".docx", ".pptx", ".ppt", ".txt"];

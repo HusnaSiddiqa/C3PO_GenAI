@@ -1,0 +1,167 @@
+classDiagram
+    %% Core Agent Module
+    class AgentBase {
+        <<abstract>>
+        +name: str
+        +description: str
+        -llm: BaseChatModel
+        -_agent: CompiledGraph
+        -_executor: AgentExecutor
+        -_agent_skill: AgentSkill
+        +invoke(messages: List[Dict]) Any
+        +ainvoke(messages: List[Dict]) Any
+        +run_server(host: str, port: int, path: str)
+        #_build_graph()* StateGraph
+        #_state_dataclass() Type[TState]
+        -_set_agent_skill(skill: AgentSkill)
+    }
+
+    class AgentExecutor {
+        -agent: AgentBase
+        +execute(context: RequestContext, event_queue: EventQueue)
+        +cancel(request: RequestContext, event_queue: EventQueue)
+        -_validate_request(context: RequestContext) bool
+    }
+
+    class ConversationState {
+        +messages: List[Dict]
+        +step: int
+    }
+
+    class ResponseFormat {
+        +status: Literal['input_required', 'completed', 'error']
+        +message: str
+    }
+
+    %% Model Provider Module
+    class ModelFactory {
+        <<static>>
+        +create_provider(provider: str, model_name: str, api_key: str, region: str, base_url: str) BaseChatModel
+    }
+
+    class BedrockProvider {
+        -model_name: str
+        -region: str
+        -extra_kwargs: Any
+        +get_llm() ChatBedrock
+    }
+
+    class MosaicProvider {
+        -model_name: str
+        -api_key: str
+        -base_url: str
+        -extra_kwargs: Any
+        +get_llm() ChatOpenAI
+    }
+
+    %% Memory Module
+    class MemoryStore {
+        -bucket_name: str
+        -prefix: str
+        -s3: boto3.client
+        +search(agent_name: str, **kwargs) str
+        +get_store(bucket_name: str, prefix: str, region_name: str)$ MemoryStore
+    }
+
+    %% Prompt Module
+    class Prompt {
+        -system_prompt: SystemPrompt
+        -admin_prompt: AdminPrompt
+        -template_prefix: str
+        -s3_utils: S3Utils
+        -s3_bucket: str
+        +get_prompt(prompt_name: str, admin_prompt_version: int) str
+        -_get_template(template_name: str) str
+        -_combine_prompts(template: str, system_content: str, admin_content: str)$ str
+    }
+
+    class SystemPrompt {
+        -s3_bucket: str
+        -system_prompt_prefix: str
+        -region: str
+        +get_system_prompt(prompt_name: str) str
+    }
+
+    class AdminPrompt {
+        -admin_prompt_name: str
+        +get_admin_prompt(admin_prompt_version: int) str
+    }
+
+    class StaticPromptMap {
+        <<static>>
+        +prompt_map: Dict[str, str]
+    }
+
+    %% Utility Module
+    class ConfigLoader {
+        <<static>>
+        +get_secret(secret_name: str, region_name: str) Dict|str
+        +load_env_variables(env_file: str) Dict[str, str]
+    }
+
+    class S3Utils {
+        -aws_region: str
+        -s3_client: boto3.client
+        +put_object(bucket_name: str, key: str, data: Any, content_type: str, metadata: Dict) bool
+        +get_object(bucket_name: str, key: str) bytes
+        +delete_object(bucket_name: str, key: str) bool
+        +list_objects(bucket_name: str, prefix: str) List[str]
+    }
+
+    class DataWarehouse {
+        -host_name: str
+        -http_path: str
+        -access_token: str
+        -connection: Connection
+        -cursor: Cursor
+        +get_data_from_warehouse(sql_query: str) List[Dict]
+        +reconnect()
+    }
+
+    %% Concrete Implementation Example
+    class NLQAgent {
+        -tools: Tools
+        +stream(query: str, thread_id: str) AsyncIterator[Dict]
+        #_build_graph() StateGraph
+    }
+
+    %% External Dependencies
+    class BaseChatModel {
+        <<external>>
+    }
+
+    class StateGraph {
+        <<external>>
+    }
+
+    class AgentSkill {
+        <<external>>
+    }
+
+    %% Relationships
+    AgentBase <|-- NLQAgent
+    AgentBase --> AgentExecutor
+    AgentBase --> ConversationState
+    AgentBase --> BaseChatModel
+    AgentBase --> ResponseFormat
+    AgentBase --> AgentSkill
+    AgentBase --> StateGraph
+
+    ModelFactory --> BedrockProvider
+    ModelFactory --> MosaicProvider
+    BedrockProvider --> BaseChatModel
+    MosaicProvider --> BaseChatModel
+
+    Prompt --> SystemPrompt
+    Prompt --> AdminPrompt
+    Prompt --> S3Utils
+    SystemPrompt --> S3Utils
+    
+    NLQAgent --> ModelFactory
+    NLQAgent --> ConfigLoader
+    NLQAgent --> StaticPromptMap
+    NLQAgent --> DataWarehouse
+
+    MemoryStore --> S3Utils
+    
+    DataWarehouse --> ConfigLoader 

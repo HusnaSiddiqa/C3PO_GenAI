@@ -1,0 +1,92 @@
+c3po:
+  image:
+    imagePullPolicy: Always
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  service:
+    type: ClusterIP
+app:
+  add_certificate: true
+  certificate_arn: arn:aws:acm:us-west-2:689566334415:certificate/185281d8-cc35-4daa-95f3-1d2b353d6a54
+
+service_account:
+  name: commercial-us-sbx-iidd-genai
+  role: arn:aws:iam::689566334415:role/commercial-dev-us-sbx-iidd-genai
+
+readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 3   
+  successThreshold: 3
+
+livenessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 30
+  failureThreshold: 3
+  timeoutSeconds: 5
+
+autoscaling:
+  enabled: true
+  
+env:
+  ALB_NAME: "commercial-us-sbx-iidd-genai"
+  EKS_NAMESPACE: "us-sbx-iidd-genai"
+  OKTA_DOMAIN: "https://gssotst.gilead.com"
+  OKTA_CLIENT_ID: "0oat98olidf7jQHBa697"
+  CLIENT_BASE_URL: "https://c3pov2-tst.gilead.com"
+  OKTA_REDIRECT_URI: "https://c3pov2-tst.gilead.com/auth/oauth/okta/callback"
+  OKTA_ISSUER : "https://gssotst.gilead.com/oauth2/default"
+  OKTA_AUDIENCE : "api://default"
+  OKTA_USER_INFO_ENDPOINT : "https://gssotst.gilead.com/oauth2/v1/userinfo"
+  OKTA_TOKEN_ENDPOINT : "https://gssotst.gilead.com/oauth2/v1/token"
+  OKTA_AUTHORIZATION_ENDPOINT : "https://gssotst.gilead.com/oauth2/v1/authorize"
+  OKTA_OIDC_METADATA_URL: "https://gssotst.gilead.com/.well-known/openid-configuration"
+  ENV: "dev"
+  DATABRICKS_HOST: "https://dbc-5c6e6e7d-7beb.cloud.databricks.com"
+  DATABRICKS_SERVER_HOSTNAME: "dbc-5c6e6e7d-7beb.cloud.databricks.com"
+  DATABRICKS_HTTP_PATH: "/sql/1.0/warehouses/20afbfe225d22476"
+  SECRET_NAME: "us-sbx-iidd-genai/databricks-pat"
+  MODEL: "us.amazon.nova-pro-v1:0"
+  MODEL_BASE_URL: "https://dbc-5c6e6e7d-7beb.cloud.databricks.com/serving-endpoints"
+  PROVIDER: "bedrock"
+  WORKSPACE_NAME: "us-sbx-iidd-genai"
+  WORKSPACE_BUCKET_NAME: "gilead-edp-commercial-dev-us-west-2-us-sbx-iidd-genai"
+  S3_BUCKET_NAME: "gilead-edp-commercial-dev-us-west-2-us-sbx-iidd-genai"
+  AGENT_BASE_PORT: "8001"
+  AGENT_BASE_URL: "commercial-us-sbx-iidd-genai"
+  DEFAULT_USER:
+  DOMAIN: "oncology"
+  DYNATRACE_ENDPOINT: "https://vyy31973.live.dynatrace.com/api/v2/otlp"
+  APP_SECRET_NAME: "us-sbx-iidd-genai/app-secret"
+  APPLICATION_NAME: "C3PO_V2_SBX"
+  OKTA_ADMIN_GROUP: "APP_us_sbx_iidd_genai_admin_user"
+  OKTA_USER_GROUP: "APP_us_sbx_iidd_genai_app_user"
+  CHAT_MANAGER_BASE_URL: "commercial-us-sbx-iidd-genai-chat-mgr"
+  CHAT_MANAGER_PORT: "8001"
+  VITE_CHAT_MGR_SECRET: "http://commercial-us-sbx-iidd-genai-chat-mgr:8001"
+  VITE_ADMIN_SECRET: "http://commercial-us-sbx-iidd-genai-admin:8001"
+  VITE_OKTA_CLIENT_ID: "0oat98olidf7jQHBa697"
+  VITE_OKTA_AUTH_URL: "https://gssotst.gilead.com/oauth2/v1/authorize"
+  VITE_OKTA_REDIRECT_URI: "https://c3pov2-tst.gilead.com/auth/oauth/okta/callback"
+  VITE_ADMIN_AD_GROUP: "APP_us_sbx_iidd_genai_admin_user"
+  VITE_APP_TITLE: "Gilead-C3POV2"
+  VITE_SUPPORT_EMAIL: Rahul.Chaturvedi@gilead.com
+  INDEX_NAME_PMR: "us-sbx-iidd-genai__pmr"
+  OPENSEARCH_HOST_URL_PMR: "https://vpc-commercial-dev-domain-a5oedeggfe5fhawyglbmrw2nmq.us-west-2.es.amazonaws.com"
+  OPENSEARCH_REGION: "us-west-2"
+  NLQ_JSON_LIMIT: 100
+  ENABLE_PROMPT_CACHING: "true"
+  LANGGRAPH_MAX_CONCURRENCY: 16
+  ####################################
+  # Feature flag for source selector dropdown
+  ####################################
+  VITE_ENABLE_SOURCE_SELECTOR: "true"
+  SUB_AGENT_MAPPING: "system_prompts/config_source_mapping.json"
+  ####################################
+  DISABLE_USER_GROUP_VALIDATION: "false"
+  ENABLE_LATENCY_OPTIMIZED_INFERENCE: "true"
+  NLQ_MAX_TOKENS: "2000"
+
