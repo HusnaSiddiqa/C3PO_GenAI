@@ -3,8 +3,27 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 [![React](https://img.shields.io/badge/react-19.1.0-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115.13-green.svg)](https://fastapi.tiangolo.com/)
+[![LangChain](https://img.shields.io/badge/LangChain-0.3.26-green.svg)](https://www.langchain.com/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-0.4.8-green.svg)](https://langchain-ai.github.io/langgraph/)
+
+[![AWS Bedrock](https://img.shields.io/badge/AWS-Bedrock-orange.svg)](https://aws.amazon.com/bedrock/)
 [![Kubernetes](https://img.shields.io/badge/kubernetes-ready-brightgreen.svg)](https://kubernetes.io/)
+[![Docker](https://img.shields.io/badge/Docker-containerized-blue.svg)](https://www.docker.com/)
+[![Helm](https://img.shields.io/badge/Helm-v3-blue.svg)](https://helm.sh/)
+[![Terraform](https://img.shields.io/badge/Terraform-IaC-purple.svg)](https://www.terraform.io/)
+
+[![Vite](https://img.shields.io/badge/Vite-7.0-yellow.svg)](https://vitejs.dev/)
+[![Material-UI](https://img.shields.io/badge/MUI-7.x-blue.svg)](https://mui.com/)
+[![Databricks](https://img.shields.io/badge/Databricks-SQL-red.svg)](https://www.databricks.com/)
+[![OpenSearch](https://img.shields.io/badge/OpenSearch-vector--db-blue.svg)](https://opensearch.org/)
+[![DynamoDB](https://img.shields.io/badge/DynamoDB-NoSQL-orange.svg)](https://aws.amazon.com/dynamodb/)
+[![S3](https://img.shields.io/badge/AWS-S3-orange.svg)](https://aws.amazon.com/s3/)
+
+[![Dynatrace](https://img.shields.io/badge/Dynatrace-monitoring-purple.svg)](https://www.dynatrace.com/)
+[![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-tracing-blue.svg)](https://opentelemetry.io/)
+[![Okta](https://img.shields.io/badge/Okta-Auth-blue.svg)](https://www.okta.com/)
 
 > An enterprise-grade, cloud-native conversational AI platform that leverages multiple specialized AI agents for intelligent data analysis, document processing, and report generation through natural language interaction.
 
