@@ -2,7 +2,7 @@ import { useConfig } from "./contexts/ConfigContext";
 
 const AccessDenied = () => {
   const { config } = useConfig()
-  const SUPPORT_EMAIL = config.support_email || "Rahul.Chaturvedi@gilead.com";
+  const SUPPORT_EMAIL = config.support_email || "support@example.com";
 
   return (
     <div

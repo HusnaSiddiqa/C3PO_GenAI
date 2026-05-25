@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-admin
+  name: generic-genai-app-admin
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-admin
+      app.kubernetes.io/name: generic-genai-app-admin
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-admin
+        app.kubernetes.io/name: generic-genai-app-admin
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -25,7 +25,7 @@ spec:
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-admin
+        name: generic-genai-app-admin
         ports:
           - containerPort: 80
         readinessProbe:
@@ -56,18 +56,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-chat-mgr
+  name: generic-genai-app-chat-mgr
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chat-mgr
+      app.kubernetes.io/name: generic-genai-app-chat-mgr
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chat-mgr
+        app.kubernetes.io/name: generic-genai-app-chat-mgr
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -78,11 +78,11 @@ spec:
           - name: SERVICE_TYPE
             value: chat-mgr
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-orchestrator
+            value: generic-genai-app-orchestrator
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-chat-mgr
+        name: generic-genai-app-chat-mgr
         ports:
           - containerPort: 8081
         readinessProbe:
@@ -113,18 +113,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-ui
+  name: generic-genai-app-ui
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ui
+      app.kubernetes.io/name: generic-genai-app-ui
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ui
+        app.kubernetes.io/name: generic-genai-app-ui
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -137,7 +137,7 @@ spec:
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-ui
+        name: generic-genai-app-ui
         ports:
           - containerPort: 80
         readinessProbe:
@@ -168,18 +168,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-nlq
+  name: generic-genai-app-nlq
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-nlq
+      app.kubernetes.io/name: generic-genai-app-nlq
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-nlq
+        app.kubernetes.io/name: generic-genai-app-nlq
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -190,11 +190,11 @@ spec:
           - name: SERVICE_TYPE
             value: nlq
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-nlq
+            value: generic-genai-app-nlq
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-nlq
+        name: generic-genai-app-nlq
         ports:
           - containerPort: 8000
         readinessProbe:
@@ -225,18 +225,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-byod
+  name: generic-genai-app-byod
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-byod
+      app.kubernetes.io/name: generic-genai-app-byod
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-byod
+        app.kubernetes.io/name: generic-genai-app-byod
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -247,11 +247,11 @@ spec:
           - name: SERVICE_TYPE
             value: byod
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-byod
+            value: generic-genai-app-byod
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-byod
+        name: generic-genai-app-byod
         ports:
           - containerPort: 8000
         readinessProbe:
@@ -282,18 +282,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-orchestrator
+  name: generic-genai-app-orchestrator
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-orchestrator
+      app.kubernetes.io/name: generic-genai-app-orchestrator
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-orchestrator
+        app.kubernetes.io/name: generic-genai-app-orchestrator
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -304,11 +304,11 @@ spec:
           - name: SERVICE_TYPE
             value: orchestrator
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-orchestrator
+            value: generic-genai-app-orchestrator
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-orchestrator
+        name: generic-genai-app-orchestrator
         ports:
           - containerPort: 8000
         readinessProbe:
@@ -339,18 +339,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-precanned-deck
+  name: generic-genai-app-precanned-deck
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-precanned-deck
+      app.kubernetes.io/name: generic-genai-app-precanned-deck
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-precanned-deck
+        app.kubernetes.io/name: generic-genai-app-precanned-deck
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -361,11 +361,11 @@ spec:
           - name: SERVICE_TYPE
             value: precanned_deck
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-precanned-deck
+            value: generic-genai-app-precanned-deck
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-precanned-deck
+        name: generic-genai-app-precanned-deck
         ports:
           - containerPort: 8000
         readinessProbe:
@@ -396,18 +396,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-ppt
+  name: generic-genai-app-ppt
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ppt
+      app.kubernetes.io/name: generic-genai-app-ppt
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-ppt
+        app.kubernetes.io/name: generic-genai-app-ppt
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -418,11 +418,11 @@ spec:
           - name: SERVICE_TYPE
             value: ppt
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-ppt
+            value: generic-genai-app-ppt
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-ppt
+        name: generic-genai-app-ppt
         ports:
           - containerPort: 8000
         readinessProbe:
@@ -453,18 +453,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-chart
+  name: generic-genai-app-chart
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chart
+      app.kubernetes.io/name: generic-genai-app-chart
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-chart
+        app.kubernetes.io/name: generic-genai-app-chart
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -475,11 +475,11 @@ spec:
           - name: SERVICE_TYPE
             value: chart
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-chart
+            value: generic-genai-app-chart
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-chart
+        name: generic-genai-app-chart
         ports:
           - containerPort: 8000
         readinessProbe:
@@ -510,18 +510,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: commercial-us-sbx-iidd-genai-rag
+  name: generic-genai-app-rag
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 2
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: commercial-us-sbx-iidd-genai-rag
+      app.kubernetes.io/name: generic-genai-app-rag
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: commercial-us-sbx-iidd-genai-rag
+        app.kubernetes.io/name: generic-genai-app-rag
         schedule_on: "fargate"
     spec:
       serviceAccountName: {{ .Values.service_account.name }}
@@ -532,11 +532,11 @@ spec:
           - name: SERVICE_TYPE
             value: rag
           - name: AGENT_BASE_URL
-            value: commercial-us-sbx-iidd-genai-rag
+            value: generic-genai-app-rag
         envFrom:
           - configMapRef:
               name: {{ .Release.Name }}-config
-        name: commercial-us-sbx-iidd-genai-rag
+        name: generic-genai-app-rag
         ports:
           - containerPort: 8000
         readinessProbe:

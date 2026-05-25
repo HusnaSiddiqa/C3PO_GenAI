@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: commercial-us-sbx-iidd-genai-byod
+  name: generic-genai-app-byod
 spec:
   type: {{ .Values.c3po.service.type }}
   selector:
-    app.kubernetes.io/name: commercial-us-sbx-iidd-genai-byod
+    app.kubernetes.io/name: generic-genai-app-byod
   ports:
     - name: http
       port: {{ .Values.env.AGENT_BASE_PORT }}

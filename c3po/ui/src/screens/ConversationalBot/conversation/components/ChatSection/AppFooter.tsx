@@ -27,7 +27,7 @@ const AppFooter = ({ openDisclaimer }: AppFooterProps) => {
         </Link>
       </Box>
       <Box display="flex" alignItems="center" gap={theme.spacing(4)}>
-        <Typography variant='f1' color={theme.palette.contrast.grayscale.level50}>Gilead © 2025</Typography>
+        <Typography variant='f1' color={theme.palette.contrast.grayscale.level50}>GenAI App © 2026</Typography>
       </Box>
     </Box>
   );

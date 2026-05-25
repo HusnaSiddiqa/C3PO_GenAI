@@ -16,7 +16,7 @@ vi.mock("../../context/UnsavedTabChangesContext", () => ({
 }));
 vi.mock("../../../../../src/contexts/UserContext", () => ({
   UserContext: { Provider: ({ children }) => children },
-  useContext: () => ({ userName: "test-user@gilead.com" }),
+  useContext: () => ({ userName: "test-user@example.com" }),
 }));
 
 const selectedRowData = {

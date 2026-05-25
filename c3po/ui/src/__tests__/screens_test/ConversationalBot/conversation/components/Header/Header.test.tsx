@@ -61,7 +61,6 @@ const renderWithProviders = (
 describe('Header', () => {
   it('should render the header with logos and navigation', () => {
     renderWithProviders(<Header toggleTheme={vi.fn()} mode="light" />);
-    expect(screen.getByAltText('Gilead Logo')).toBeInTheDocument();
     expect(screen.getByAltText('C3PO Logo')).toBeInTheDocument();
     expect(screen.getByText('Chat')).toBeInTheDocument();
   });

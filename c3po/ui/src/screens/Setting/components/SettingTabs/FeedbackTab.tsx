@@ -464,8 +464,7 @@ export const FeedbackTabComponent = () => {
                         lineHeight: "20px",
                       }}
                     >
-                      For feedback older than 30 days, please contact
-                      xyz@gilead.com
+                      For feedback older than 30 days, please contact support@example.com
                     </Typography>
                   </Box>
                 )}

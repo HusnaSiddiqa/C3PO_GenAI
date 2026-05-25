@@ -40,7 +40,7 @@ export const useStreamBotResponse = () => {
     }) => {
       abortController = new AbortController(); // reset for each request
 
-      const effectiveUserId = userId ?? "harikrishnan.palanisamy@gilead.com";
+      const effectiveUserId = userId ?? "default-user@example.com";
       try {
         const response = await authFetch(
           "/v2/chat-manager/conversation/query-stream",

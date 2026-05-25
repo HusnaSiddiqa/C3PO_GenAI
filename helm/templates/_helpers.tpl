@@ -1,14 +1,14 @@
 {{/*
 Common labels
 */}}
-{{- define "gilead-dna-platform_commercial-us-sbx-iidd-genai.labels" -}}
+{{- define "generic-platform_generic-genai-app.labels" -}}
 app.kubernetes.io/name: {{ .Chart.Name }}
 helm.sh/chart: {{ printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
-{{- define "gilead-dna-platform_commercial-us-sbx-iidd-genai.fullname" -}}
+{{- define "generic-platform_generic-genai-app.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}

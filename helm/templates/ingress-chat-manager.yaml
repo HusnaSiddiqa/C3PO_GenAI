@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
- name: ingress-us-iidd-genai-chat-mgr
+ name: ingress-genai-app-chat-mgr
  annotations:
    kubernetes.io/ingress.class: alb
    alb.ingress.kubernetes.io/scheme: internal
@@ -34,6 +34,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: commercial-us-sbx-iidd-genai-chat-mgr
+              name: generic-genai-app-chat-mgr
               port:
                 number: {{ .Values.env.AGENT_BASE_PORT }}

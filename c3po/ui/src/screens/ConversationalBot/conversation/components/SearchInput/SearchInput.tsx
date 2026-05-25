@@ -113,7 +113,7 @@ export const SearchInput = ({
     mutationFn: async (file: File) => {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("user_id", "harikrish@gilead.com");
+      formData.append("user_id", "default-user@example.com");
 
       const recentConversationId = sessionStorage.getItem(
         "recentConversationId"

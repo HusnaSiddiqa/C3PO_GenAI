@@ -10,5 +10,5 @@ async def root():
 
 @app.get("/admin")
 async def root():
-    resp = requests.get("http://commercial-us-sbx-iidd-genai-chat-mgr:8001")
+    resp = requests.get("http://generic-genai-app-chat-mgr:8001")
     return {"message": "admin", "data": resp.json()}

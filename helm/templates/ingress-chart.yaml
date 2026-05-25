@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
- name: ingress-us-iidd-genai-chart
+ name: ingress-genai-app-chart
  annotations:
    kubernetes.io/ingress.class: alb
    alb.ingress.kubernetes.io/scheme: internal
@@ -33,6 +33,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: commercial-us-sbx-iidd-genai-chart
+              name: generic-genai-app-chart
               port:
                 number: {{ .Values.env.AGENT_BASE_PORT }}

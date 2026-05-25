@@ -21,7 +21,7 @@ describe("UserProvider", () => {
     return (
       <ConfigContext value={{
         config: {
-          admin_ad_group: "APP_us_dev_iidd_genai_admin_user",
+          admin_ad_group: "APP_genai_app_admin_user",
           admin_secret: "",
           app_default_user_id: "",
           app_title: "",
@@ -76,7 +76,7 @@ describe("UserProvider", () => {
     (decodeToken as Mock).mockReturnValueOnce({
       sub: "1",
       userinfo: { name: "Alice" },
-      groups: ["APP_us_dev_iidd_genai_admin_user"],
+      groups: ["APP_genai_app_admin_user"],
     });
 
     render(

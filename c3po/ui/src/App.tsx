@@ -38,7 +38,7 @@ function App() {
   const { config } = useConfig()
   console.log(config);
   // Set document title from environment variable
-  document.title = config.app_title || "Gilead-C3PO";
+  document.title = config.app_title || "GenAI-ChatBot";
 
   if (
     window.location.hostname === "127.0.0.1" &&

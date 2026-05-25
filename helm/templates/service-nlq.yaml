@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: commercial-us-sbx-iidd-genai-nlq
+  name: generic-genai-app-nlq
 spec:
   type: {{ .Values.c3po.service.type }}
   selector:
-    app.kubernetes.io/name: commercial-us-sbx-iidd-genai-nlq
+    app.kubernetes.io/name: generic-genai-app-nlq
   ports:
     - name: http
       port: {{ .Values.env.AGENT_BASE_PORT }}

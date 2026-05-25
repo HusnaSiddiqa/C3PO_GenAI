@@ -51,11 +51,6 @@ export function ErrorFallback({ error }: FallbackProps) {
                                 >
                                     <Box display="flex" gap={2}>
                                         <img
-                                            src="gilead-logo.svg"
-                                            alt="Gilead Logo"
-                                            style={{ height: "32px", width: "32px" }}
-                                        />
-                                        <img
                                             src="c3po.svg"
                                             alt="C3PO Logo"
                                             style={{ height: "32px", width: "32px" }}
@@ -164,7 +159,7 @@ export function ErrorFallback({ error }: FallbackProps) {
                             lineHeight: "normal"
                         }}> 
                         we're facing a temporary issue and couldn't complete your request.
-                        Our team is looking into it. For assistance, please reach out to xyz@gilead.com
+                        Our team is looking into it. For assistance, please reach out to support@example.com
                         </Typography>
                     </Box>
                 </Box>

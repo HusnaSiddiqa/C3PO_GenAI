@@ -19,12 +19,12 @@ describe("AccessDenied", () => {
   it("renders the contact email link", () => {
     render(<AccessDenied />);
     const emailLink = screen.getByRole("link", {
-      name: "Rahul.Chaturvedi@gilead.com",
+      name: "support@example.com",
     });
     expect(emailLink).toBeInTheDocument();
     expect(emailLink).toHaveAttribute(
       "href",
-      "mailto:Rahul.Chaturvedi@gilead.com"
+      "mailto:support@example.com"
     );
   });
 

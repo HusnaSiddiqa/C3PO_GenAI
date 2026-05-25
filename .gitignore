@@ -1,2 +1,5 @@
 *.tfvars.json
 __pycache__/
+.env
+.env.*
+.env.local

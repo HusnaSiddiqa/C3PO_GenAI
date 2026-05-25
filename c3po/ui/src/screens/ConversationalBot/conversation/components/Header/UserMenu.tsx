@@ -8,7 +8,7 @@ import {
 } from "../../../../../contexts/UserContext"; // Adjust path if needed
 import { useConfig } from "../../../../../contexts/ConfigContext";
 
-// const userEmail = "irving.b@gilead.com";
+// const userEmail = "user@example.com";
 // const userName = "Irving B.";
 
 export const UserMenu = () => {

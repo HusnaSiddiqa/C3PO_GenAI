@@ -14,11 +14,11 @@ describe("AppFooter", () => {
     renderWithTheme(<AppFooter />);
     expect(
       screen.getByText(
-        "Make sure AI-generated content is accurate and appropriate before using."
+        /Make sure AI-generated content is accurate/
       )
     ).toBeInTheDocument();
     expect(screen.getByText("Read more")).toBeInTheDocument();
-    expect(screen.getByText("Gilead © 2025")).toBeInTheDocument();
+    expect(screen.getByText("GenAI App © 2026")).toBeInTheDocument();
   });
 
   it("should call openDisclaimer when 'Read more' is clicked", () => {

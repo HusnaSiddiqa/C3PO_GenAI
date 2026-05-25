@@ -58,11 +58,6 @@ function Header({
         >
           <Box display="flex" gap={2}>
             <img
-              src="/gilead-logo.svg"
-              alt="Gilead Logo"
-              style={{ height: "32px", width: "32px" }}
-            />
-            <img
               src="/c3po.svg"
               alt="C3PO Logo"
               style={{ height: "32px", width: "32px" }}

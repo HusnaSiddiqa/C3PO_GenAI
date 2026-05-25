@@ -16,7 +16,7 @@ clickable_questions_table = get_table(CLICKABLE_QUESTIONS_TABLE)
 
 
 def is_admin(user):
-    return 'APP_us_sbx_iidd_genai_admin_user' in user.get('Groups', [])
+    return 'APP_genai_app_admin_user' in user.get('Groups', [])
 
 # --- Admin Clickable Questions Routes ---
 

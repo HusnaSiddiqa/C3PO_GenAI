@@ -50,7 +50,7 @@ The agent is deployed using Helm charts with environment-specific values:
 The Helm chart exposes the agent as a Kubernetes service that can be accessed internally within the EKS cluster:
 
 ```
-http://commercial-us-sbx-iidd-genai-precanned-deck:8001/v2/agents/precanned_deck
+http://generic-genai-app-precanned-deck:8001/v2/agents/precanned_deck
 ```
 
 The external port (8001) is configured via the `AGENT_BASE_PORT` setting in the values.yaml files, while the agent internally runs on port 8000.

@@ -769,7 +769,7 @@ You must set these before using PromptStore (for external apps like those on EKS
 ```python
 from PromptStore import PromptStore
 
-store = PromptStore("NLQ_Agent", "us-dev-iidd-genai/agents")
+store = PromptStore("NLQ_Agent", "generic-workspace/agents")
 ```
 ### 2. Store a New Prompt
 ```python

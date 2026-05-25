@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-admin-hpa
+  name: generic-genai-app-admin-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-admin
+    name: generic-genai-app-admin
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -20,12 +20,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-chat-mgr-hpa
+  name: generic-genai-app-chat-mgr-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-chat-mgr
+    name: generic-genai-app-chat-mgr
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -39,12 +39,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-ui-hpa
+  name: generic-genai-app-ui-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-ui
+    name: generic-genai-app-ui
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -58,12 +58,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-nlq-hpa
+  name: generic-genai-app-nlq-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-nlq
+    name: generic-genai-app-nlq
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -77,12 +77,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-byod-hpa
+  name: generic-genai-app-byod-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-byod
+    name: generic-genai-app-byod
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -96,12 +96,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-orchestrator-hpa
+  name: generic-genai-app-orchestrator-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-orchestrator
+    name: generic-genai-app-orchestrator
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -115,12 +115,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-precanned-deck-hpa
+  name: generic-genai-app-precanned-deck-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-precanned-deck
+    name: generic-genai-app-precanned-deck
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -134,12 +134,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-ppt-hpa
+  name: generic-genai-app-ppt-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-ppt
+    name: generic-genai-app-ppt
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -153,12 +153,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-chart-hpa
+  name: generic-genai-app-chart-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-chart
+    name: generic-genai-app-chart
   minReplicas: 2
   maxReplicas: 4
   metrics:
@@ -172,12 +172,12 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: commercial-us-sbx-iidd-genai-rag-hpa
+  name: generic-genai-app-rag-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: commercial-us-sbx-iidd-genai-rag
+    name: generic-genai-app-rag
   minReplicas: 2
   maxReplicas: 4
   metrics:

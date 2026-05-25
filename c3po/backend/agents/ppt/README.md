@@ -252,4 +252,4 @@ This tool is designed to be extensible. You can:
 
 ## License
 
-This project is part of the commercial-us-sbx-iidd-genai package and follows the same licensing terms.
+This project is part of the generic-genai-app package and follows the same licensing terms.

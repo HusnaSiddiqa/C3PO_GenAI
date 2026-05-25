@@ -97,11 +97,8 @@ describe('ErrorFallback', () => {
   it('renders logos correctly', () => {
     renderWithRouter(<ErrorFallback error={mockError} resetErrorBoundary={() => {}} />);
 
-    const gileadLogo = screen.getByAltText('Gilead Logo');
     const c3poLogo = screen.getByAltText('C3PO Logo');
 
-    expect(gileadLogo).toBeInTheDocument();
-    expect(gileadLogo).toHaveAttribute('src', 'gilead-logo.svg');
     expect(c3poLogo).toBeInTheDocument();
     expect(c3poLogo).toHaveAttribute('src', 'c3po.svg');
   });
@@ -176,7 +173,7 @@ describe('ErrorFallback', () => {
   it('shows contact information for assistance', () => {
     renderWithRouter(<ErrorFallback error={mockError} resetErrorBoundary={() => {}} />);
 
-    expect(screen.getByText(/xyz@gilead.com/)).toBeInTheDocument();
+    expect(screen.getByText(/support@example.com/)).toBeInTheDocument();
   });
 
   it('applies theme correctly', () => {
